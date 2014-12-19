@@ -6,7 +6,7 @@ function dsi8
   sudo touch sites/default/services.yml
   sudo chmod 0777 sites/default/services.yml
 
-  drush si --db-url=mysql://root:258gwe@localhost/dev_d8 -y
+  drush si --db-url=mysql://root:@localhost/dev_d8 -y
   drush upwd admin --password="test"
 
   drush en simpletest -y

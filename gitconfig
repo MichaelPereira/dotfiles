@@ -1,0 +1,77 @@
+[user]
+  name = Daniel Wehner
+  email = daniel@tag1consulting.com
+  editor = vim 
+[merge]
+  tool = meld
+[alias] # Shortcuts
+  b = branch
+  c = checkout
+  co = commit
+  pl = pull
+  pr = pull --rebase
+  ps = push
+  d = diff --no-color
+  di = diff
+  s = status -s
+  st = status -sb
+  rh = reset --hard
+  cf = clean -f
+  stain = stash --keep-index
+  w = whatchanged -p
+  wo = whatchanged -p origin..
+  cp = format-patch --no-prefix --no-color
+  cp = cherry-pick
+  pp = !git pull && git push
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate    
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+  filelog = log -u
+  unstage = reset HEAD --
+  ls = ls-files
+  rc = rebase --continue
+  rs = rebase --skip
+  
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[diff]
+  renames = copies
+
+[url "git@dev.erdfisch.de:"]
+    insteadOf = ef:
+
+[url "git@code.greenpeace.de:"]
+    insteadOf = gp:
+
+[url "git://anongit.kde.org/"]
+  insteadOf = kde:
+[url "ssh://git@git.kde.org/"]
+  pushInsteadOf = kde:
+
+[branch]
+  #autosetuprebase = always
+[core]
+  editor = vim
+  attributesfile=/home/dawehner/.lgobal_gitattributes
+	excludesfile = /home/dawehner/.gitignore_global
+[rerere]
+	enabled = 1
+[push]
+	default = simple
