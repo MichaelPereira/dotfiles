@@ -75,3 +75,5 @@
 	enabled = 1
 [push]
 	default = simple
+[gui]
+	recentrepo = /Users/dawehner/www/d8
