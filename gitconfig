@@ -53,6 +53,7 @@
 
 [diff]
   renames = copies
+	renameLimit = 1500
 
 [url "git@dev.erdfisch.de:"]
     insteadOf = ef:

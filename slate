@@ -13,6 +13,7 @@ alias menu-bar-height 22
 alias mail-width 550
 alias mail-height 800
 
+# 2th and center
 alias recenter move screenOriginX+(screenSizeX-windowSizeX)/2;screenOriginY+(screenSizeY-windowSizeY)/3 windowSizeX;windowSizeY
 alias full     move screenOriginX;screenOriginY screenSizeX;screenSizeY
 alias left     move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
@@ -20,12 +21,19 @@ alias right    move screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
 alias center   move ${middle-left};screenOriginY ${middle-width};screenSizeY
 alias middle   move ${middle-left};${middle-top} ${middle-width};${middle-height}
 
+# 4th separation
+alias topleft corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topright corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
+
 alias buddies   move screenSizeX-(${buddies-width}+${margin});${menu-bar-height}+${margin} ${buddies-width};screenSizeY-(${margin}*2)
 alias mail      move screenSizeX-(${mail-width}+${buddies-width}+${margin}*2);${menu-bar-height}+${margin} ${mail-width};${mail-height}
 alias reminders move screenOriginX+${margin};screenOriginY+${margin} windowSizeX;windowSizeY
 alias twitter   move screenOriginX;screenOriginY ${twitter-width};screenSizeY
 
 alias trigger cmd;shift;space
+alias hyper cmd;alt;shift;space
 
 bind tab:${trigger}    ${recenter}
 bind space:${trigger}  ${full}
@@ -38,3 +46,9 @@ bind g:${trigger}      ${mail}
 bind r:${trigger}      ${reminders}
 bind t:${trigger}      ${twitter}
 bind return:${trigger} undo
+
+bind r:${hyper} ${topleft}
+bind t:${hyper} ${topright}
+bind c:${hyper} ${bottomleft}
+bind v:${hyper} ${bottomright}
+

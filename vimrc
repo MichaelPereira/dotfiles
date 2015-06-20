@@ -53,3 +53,5 @@ filetype on
 
 au BufRead,BufNewFile *.rs set filetype=rust
 
+autocmd FileType crontab setlocal nowritebackup
+

@@ -5,10 +5,6 @@ if status --is-interactive
     set PATH $PATH ~/anaconda/bin
 end
 
-set default_path /usr/bin /usr/sbin /bin /sbin
-set homebrew /usr/local/bin /usr/local/sbin
-set -gx PATH $homebrew $default_path
-
 ulimit -n 65536
 ulimit -u 2048
 
