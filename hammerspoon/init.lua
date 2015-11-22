@@ -1,8 +1,10 @@
-local hyper = { "cmd", "shift", "ctrl", "alt" }
+local hyper = { "alt", "shift", "ctrl" }
 
 -- Disable annimations
 hs.window.animationDuration = 0
 
+-- Hide shadows
+-- hs.window.setShadows(false)
 
 ---- Window managment
 local display_laptop = "Color LCD"
@@ -15,20 +17,33 @@ local laptop_ide_work = {
   {"PhpStorm", nil,  display_laptop, hs.layout.left50, nil, nil},
 }
 
+local laptop_ide_work2 = {
+  {"iTerm", nil,  display_laptop, hs.layout.right30, nil, nil},
+  {"PhpStorm", nil,  display_laptop, hs.layout.left70, nil, nil},
+}
+
 hs.hotkey.bind(hyper, '1', function() hs.layout.apply(laptop_ide_work) end)
+hs.hotkey.bind(hyper, '2', function() hs.layout.apply(laptop_ide_work2) end)
+
+hs.hotkey.bind(hyper, 's', function() toggle_application('iTerm') end)
+hs.hotkey.bind(hyper, 'w', function() toggle_application('Textual') end)
 
 -- hyper left for left one half window
 hs.hotkey.bind(hyper, "left", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+  if hs.window.focusedWindow() then
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
 
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f)
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w / 2
+    f.h = max.h
+    win:setFrame(f)
+  else
+    hs.alert.show("No active window")
+  end
 end)
 
 -- hyper right for right one half window
@@ -42,6 +57,74 @@ hs.hotkey.bind(hyper, 'right', function()
     f.x = max.x + (max.w / 2)
     f.y = max.y
     f.w = max.w / 2
+    f.h = max.h
+    win:setFrame(f)
+  else
+    hs.alert.show("No active window")
+  end
+end)
+
+hs.hotkey.bind(hyper, "7", function()
+  if hs.window.focusedWindow() then
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w * 0.7
+    f.h = max.h
+    win:setFrame(f)
+  else
+    hs.alert.show("No active window")
+  end
+end)
+
+hs.hotkey.bind(hyper, "6", function()
+  if hs.window.focusedWindow() then
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w * 0.6
+    f.h = max.h
+    win:setFrame(f)
+  else
+    hs.alert.show("No active window")
+  end
+end)
+
+hs.hotkey.bind(hyper, "3", function()
+  if hs.window.focusedWindow() then
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x + (max.w * 0.7)
+    f.y = max.y
+    f.w = max.w * 0.3
+    f.h = max.h
+    win:setFrame(f)
+  else
+    hs.alert.show("No active window")
+  end
+end)
+
+hs.hotkey.bind(hyper, "4", function()
+  if hs.window.focusedWindow() then
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x + (max.w * 0.6)
+    f.y = max.y
+    f.w = max.w * 0.4
     f.h = max.h
     win:setFrame(f)
   else
@@ -209,3 +292,21 @@ hs.hotkey.bind(hyper, "i", function()
   hs.hints.windowHints()
 end)
 
+-- Toggle an application between being the frontmost app, and being hidden
+function toggle_application(_app)
+    local app = hs.appfinder.appFromName(_app)
+    if not app then
+        -- FIXME: This should really launch _app
+        return
+    end
+    local mainwin = app:mainWindow()
+    if mainwin then
+        if mainwin == hs.window.focusedWindow() then
+            mainwin:application():hide()
+        else
+            mainwin:application():activate(true)
+            mainwin:application():unhide()
+            mainwin:focus()
+        end
+    end
+end
